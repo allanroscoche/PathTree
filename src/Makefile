@@ -1,7 +1,7 @@
-all: generator
+all: generator 
 
-generator: generator.cpp
-	g++ -o generator generator.cpp
+generator: generator.c
+	gcc -o generator generator.c
 
 clean:
 	rm generator *.o *~

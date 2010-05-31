@@ -1,7 +1,30 @@
-all: generator 
+CC=gcc
+FLAGS= -Wall
 
-generator: generator.c
-	gcc -o generator generator.c
+GENERATOR_BIN= generator
+GENERATOR_SRC= generator.c
+KMERS_BUILDER_BIN = kmersb
+KMERS_BUILDER_SRC = kmersb.c
+
+LIB= utilities
+LIB_SRC = utilities.c	
+
+all: ${GENERATOR_BIN} ${KMERS_BUILDER_BIN}
+
+${GENERATOR_BIN}: ${GENERATOR_BIN}.o
+	${CC} ${FLAGS} -o ${GENERATOR_BIN} ${GENERATOR_BIN}.o
+
+${GENERATOR_BIN}.o: ${GENERATOR_SRC}
+	${CC} ${FLAGS} -c -o ${GENERATOR_BIN}.o ${GENERATOR_SRC}
+
+${KMERS_BUILDER_BIN}: ${KMERS_BUILDER_BIN}.o ${LIB}.o
+	${CC} ${FLAGS} -o ${KMERS_BUILDER_BIN} ${KMERS_BUILDER_BIN}.o ${LIB}.o
+
+${KMERS_BUILDER_BIN}.o: ${KMERS_BUILDER_SRC}
+	${CC} ${FLAGS} -c -o ${KMERS_BUILDER_BIN}.o ${KMERS_BUILDER_SRC}
+
+${LIB}.o: ${LIB_SRC} ${LIB}.h
+	${CC} ${FLAGS} -c -o ${LIB}.o ${LIB_SRC}
 
 clean:
-	rm generator *.o *~
+	rm ${GENERATOR_BIN} ${KMERS_BUILDER_BIN} *.o *~

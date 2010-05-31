@@ -12,17 +12,17 @@ int main(int argc, char ** argv)
   char descricao[TAM_BUFFER];
 
   if(argc < 3){
-    printf("usage: generator [size] [quantity]\n");
+    printf("usage: generator [size] [coverage]\n");
     return 1;
   }
 
   // le a descricao da sequencia
   while( (i<TAM_BUFFER) && ((descricao[i]=getchar()) != '\n'))
   {
-    putchar(descricao[i]);
+       //putchar(descricao[i]);
     i++;
   }
-  putchar('\n');
+  //putchar('\n');
 
   // armazena a sequencia na memoria
   i=0;
@@ -41,23 +41,24 @@ int main(int argc, char ** argv)
   }
   tam_buffer = i;
 
-  printf("\n %lu bases\n",tam_buffer);
+  //printf("\n %lu bases\n",tam_buffer);
 
   unsigned long j;
   unsigned long rand_i;
   unsigned int short_read_size;
-  unsigned long short_read_quant;
+  double short_read_coverage;
 
   short_read_size = atoi(argv[1]);
-  short_read_quant = atoi(argv[2]);
+  short_read_coverage = atof(argv[2]);
 
-  for(i=0;i<short_read_quant;i++)
+  i=0;
+  while(short_read_coverage > (i/tam_buffer))
   {
     rand_i = rand() % (tam_buffer - short_read_size);
     printf("\n>> read[%lu]= %lu to %lu\n",i,rand_i,rand_i+short_read_size);
     for(j=0;j<short_read_size;j++)
       putchar(buffer[rand_i++]);
-
+    i++;
   }
   putchar('\n');
   return 0;

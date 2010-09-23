@@ -52,7 +52,7 @@ int main(int argc, char ** argv)
   short_read_coverage = atof(argv[2]);
 
   i=0;
-  while(short_read_coverage > (i/tam_buffer))
+  while(short_read_coverage > ((i*short_read_size)/tam_buffer))
   {
     rand_i = rand() % (tam_buffer - short_read_size);
     printf("\n>> read[%lu]= %lu to %lu\n",i,rand_i,rand_i+short_read_size);

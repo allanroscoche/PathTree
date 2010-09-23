@@ -1,9 +1,7 @@
 
 - Reader for FastaQ files 
-  - Read a FastaQ file from STDIN
-  - Read a FastaQ file from a file
+ - Read a FastaQ file from a file
 - Generator of short reads
-  - Random picks reads of "n" size
-  - Set a coverage
+ - Set a coverage
 - A prefix tree
 
